@@ -20,9 +20,9 @@ export default function Order() {
   }
 
   async function fetchPizzaTypes() {
-    const pizzaRes = await fetch("/api/pizzas");
-    const pizzaJson = await pizzaRes.json();
-    setPizzaTypes(pizzaJson);
+    const res = await fetch("/api/pizzas");
+    const data = await res.json();
+    setPizzaTypes(data);
     setLoading(false);
   }
 
