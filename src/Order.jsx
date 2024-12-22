@@ -21,6 +21,10 @@ export default function Order() {
     price = intl.format(selectedPizza.sizes[pizzaSize]);
   }
 
+  useEffect(() => {
+    fetchPizzaTypes();
+  }, []);
+
   async function fetchPizzaTypes() {
     const res = await fetch("/api/pizzas");
     const data = await res.json();
@@ -28,9 +32,19 @@ export default function Order() {
     setLoading(false);
   }
 
-  useEffect(() => {
-    fetchPizzaTypes();
-  }, []);
+  async function checkout() {
+    setLoading(true);
+    await fetch("/api/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ cart }),
+    });
+
+    setCart([]);
+    setLoading(false);
+  }
 
   return (
     <div className="order-page">
@@ -117,7 +131,7 @@ export default function Order() {
           </div>
         </form>
       </div>
-      {loading ? "Loading..." : <Cart cart={cart} checkout={() => {}} />}
+      {loading ? "Loading..." : <Cart cart={cart} checkout={checkout} />}
     </div>
   );
 }
