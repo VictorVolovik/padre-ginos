@@ -5,13 +5,11 @@ import Order from "./Order";
 
 const App = () => {
   return (
-    <StrictMode>
-      <div>
-        <h1 className="logo">Padre Gino's</h1>
-        <Order />
-        <PizzaOfTheDay />
-      </div>
-    </StrictMode>
+    <div>
+      <h1 className="logo">Padre Gino's</h1>
+      <Order />
+      <PizzaOfTheDay />
+    </div>
   );
 };
 
@@ -19,4 +17,8 @@ export default App; // fix Vite hmr
 
 const container = document.getElementById("root");
 const root = createRoot(container);
-root.render(<App />);
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+);
