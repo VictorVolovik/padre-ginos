@@ -1,9 +1,9 @@
-const Pizza = (props) => {
+const Pizza = ({ name, description, image }) => {
   return (
     <div className="pizza">
-      <h2>{props.name}</h2>
-      <p>{props.description}</p>
-      <img src={props.image} alt={props.name} />
+      <h2>{name}</h2>
+      <p>{description}</p>
+      <img src={image} alt={name} />
     </div>
   );
 };
