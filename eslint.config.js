@@ -1,6 +1,7 @@
 import globals from "globals";
 import pluginJs from "@eslint/js";
 import pluginReact from "eslint-plugin-react";
+import pluginQuery from "@tanstack/eslint-plugin-query";
 import prettier from "eslint-config-prettier";
 
 /** @type {import('eslint').Linter.Config[]} */
@@ -11,7 +12,15 @@ export default [
     ...pluginReact.configs.flat.recommended,
     settings: {
       react: {
-        version: "detect", // Automatically detect the React version
+        version: "detect",
+      },
+    },
+  },
+  {
+    plugins: {
+      query: pluginQuery.configs["flat/recommended"],
+      rules: {
+        ...pluginQuery.configs.recommended.rules,
       },
     },
   },

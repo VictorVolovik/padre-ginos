@@ -5,7 +5,7 @@ import Cart from "../Cart";
 import { CartContext } from "../contexts";
 
 export const Route = createLazyFileRoute("/order")({
-  component: Order,
+  component: OrderRoute,
 });
 
 const intl = new Intl.NumberFormat("en-US", {
@@ -13,7 +13,7 @@ const intl = new Intl.NumberFormat("en-US", {
   currency: "USD",
 });
 
-function Order() {
+function OrderRoute() {
   const [pizzaTypes, setPizzaTypes] = useState([]);
   const [pizzaType, setPizzaType] = useState("pepperoni");
   const [pizzaSize, setPizzaSize] = useState("M");
