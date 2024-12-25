@@ -5,10 +5,19 @@ import getPastOrder from "../api/getPastOrder";
 import { createLazyFileRoute } from "@tanstack/react-router";
 import Modal from "../Modal";
 import formatCurrency from "../utils/formatCurrency";
+import ErrorBoundary from "../ErrorBoundary";
 
 export const Route = createLazyFileRoute("/past")({
-  component: PastOrdersRoute,
+  component: PastOrdersRouteWithErrorBoundary,
 });
+
+function PastOrdersRouteWithErrorBoundary() {
+  return (
+    <ErrorBoundary>
+      <PastOrdersRoute />
+    </ErrorBoundary>
+  );
+}
 
 function PastOrdersRoute() {
   const [page, setPage] = useState(1);
@@ -16,7 +25,7 @@ function PastOrdersRoute() {
   const { isLoading: isPastOrdersLoading, data: pastOrdersData } = useQuery({
     queryKey: ["past-orders", page],
     queryFn: () => getPastOrders(page),
-    staleTime: 30000, // ms
+    staleTime: 30_000, // ms
   });
 
   const { isLoading: isPastOrderLoading, data: pastOrderData } = useQuery({
